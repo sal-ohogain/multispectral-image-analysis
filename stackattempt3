@@ -1,0 +1,27 @@
+# load and show an image with Pillow
+from PIL import Image
+import cv2
+import numpy as np
+
+
+# load the image
+image = Image.open('C:/Users/sarah/OneDrive/Desktop/Slide 1 Sample 4_2/420nm.tif')
+# summarize some details about the image
+print(image.format)
+print(image.mode)
+print(image.size)
+# show the image
+#image.show()
+
+img1 = cv2.imread('C:/Users/sarah/OneDrive/Desktop/Slide 1 Sample 4_2/420nm.tif')
+img2 = cv2.imread('C:/Users/sarah/OneDrive/Desktop/Slide 1 Sample 4_2/550nm.tif')
+print(img1.shape)
+print(img2.shape)
+img1 = cv2.resize(img1, (0, 0), None, 0.5, 0.5)
+img2 = cv2.resize(img2, (0, 0), None, 0.5, 0.5)
+img1 = cv2.cvtColor(img1, cv2.COLOR_GRAY2BGR)
+hor= np.hstack((img1, img2))
+ver = np.vstack((img1, img2))
+cv2.imshow('Vertical', ver)
+cv2.imshow('Horizontal', hor)
+cv2.waitKey(0)
